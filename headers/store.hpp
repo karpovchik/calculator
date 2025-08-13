@@ -1,10 +1,11 @@
+#include "help_funcs.hpp"
+
 // Здесь реализуется класс Store
 
-template <typename T>
 class Store {
 private:
     struct Node {
-        Token<T> token;
+        Token token;
         Node* prev;
         Node* next;
     };
@@ -17,31 +18,32 @@ public:
     Store();
     Store(Node* front_, Node* end_, int size_);
 
-    inline void push_front(Token<T> token_);
-    inline void push_back(Token<T> token_);
+    inline void push_front(Token token_);
+    inline void push_back(Token token_);
     inline void pop_front();
-    inline Token<T> get_front();
+    inline Token get_front();
     inline int get_size();
+    inline void inc_size();
+    inline void dec_size();
 };
 
-template <typename T>
-Store<T>::Store() { }
+Store::Store() { }
 
-template <typename T>
-Store<T>::Store(Node* front_, Node* end_, int size_) {
+Store::Store(Node* front_, Node* end_, int size_) {
     front_ = nullptr;
     end_ = nullptr;
-    size_ = nullptr;
+    size_ = 0;
 }
 
-template <typename T>
-inline Token<T> Store<T>::get_front() { return front->token; }
+inline Token Store::get_front() { return front->token; }
 
-template <typename T>
-inline int Store<T>::get_size() { return size; }
+inline int Store::get_size() { return size; }
 
-template <typename T>
-void Store<T>::push_front(Token<T> token_) {
+inline void Store::inc_size() { ++size; }
+
+inline void Store::dec_size() { --size; }
+
+void Store::push_front(Token token_) {
     Node node;
     node.token = token_;
 
@@ -56,11 +58,10 @@ void Store<T>::push_front(Token<T> token_) {
         tmp->prev = front;
         tmp = nullptr;
     }
-    ++get_size();
+    inc_size();
 }
 
-template <typename T>
-void Store<T>::push_back(Token<T> token_) {
+void Store::push_back(Token token_) {
     Node node;
     node.token = token_;
 
@@ -74,4 +75,26 @@ void Store<T>::push_back(Token<T> token_) {
         end->prev = tmp;
         tmp->next = end;
         tmp = nullptr;
+    }
+    inc_size();
+}
+
+void Store::pop_front() {
+    Node* tmp = front;
+
+    if (get_size() == 0) {
+        error("[ERROR] There is no element to delete!\n");
+        delete tmp;
+    }
+    else if (get_size() == 1) {
+        front = nullptr;
+        end = nullptr;
+    }
+    else {
+        front = front->next;
+        front->prev = nullptr;
+    }
+    delete tmp;
+    dec_size();
+}
 

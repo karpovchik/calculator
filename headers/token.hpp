@@ -1,36 +1,53 @@
 // Здесь реализуется класс Token
-// value : число, или символ, или строка
+// kind : признак оператора, или скобки, или функции
+// value : число
 // type : операция унарная или бинарная
 // priority только для операторов
+// func : тип функции
 
-template <typename T> 
 class Token {
 private:
-    T value;
+    char kind;
     char type;
+    std::string func;
     int priority;
+    double value;
 
 public:
     Token();
-    Token(T val);
-    Token(T val, char tp, int prio);
-    
-    inline T get_value();
+    Token(char kd, char tp, std::string fnc, int prio, double val);
+   
+    inline void set_kind(char kd);
+    inline void set_func(std::string fnc);
+    inline void set_value(double val);
+    inline void set_type(char tp);
+    inline void set_priority(int prio);
+
+    inline char get_kind();
+    inline std::string get_func();
+    inline double get_value();
     inline char get_type();
     inline int get_priority();
 };
 
-template <typename T>
-Token<T>::Token() { }
-template <typename T>
-Token<T>::Token(T val) : value(val) { }
-template <typename T>
-Token<T>::Token(T val, char tp, int prio) : value(val), type(tp), priority(prio) { }
+Token::Token() { }
+Token::Token(char kd, char tp, std::string fnc, int prio, double val) {
+    kind = kd;
+    type = tp;
+    func = fnc;
+    priority = prio;
+    value = val;
+}
 
-template <typename T>    
-inline T Token<T>::get_value() { return value; }
-template <typename T>
-inline char Token<T>::get_type() { return type; }
-template <typename T>
-inline int Token<T>::get_priority() { return priority; }
+inline char Token::get_kind() { return kind; }
+inline std::string Token::get_func() { return func; }
+inline double Token::get_value() { return value; }
+inline char Token::get_type() { return this->type; }
+inline int Token::get_priority() { return this->priority; }
+
+inline void Token::set_kind(char kd) { kind = kd; }
+inline void Token::set_type(char tp) { type = tp; }
+inline void Token::set_func(std::string fnc) { func = fnc; }
+inline void Token::set_priority(int prio) { priority = prio; }
+inline void Token::set_value(double val) { value = val; }
 
