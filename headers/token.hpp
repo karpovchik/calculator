@@ -30,7 +30,14 @@ public:
     inline int get_priority();
 };
 
-Token::Token() { }
+Token::Token() { 
+    kind = '0';
+    type = '0';
+    func = "0";
+    priority = 0;
+    value = 0;
+}
+
 Token::Token(char kd, char tp, std::string fnc, int prio, double val) {
     kind = kd;
     type = tp;

@@ -3,6 +3,7 @@
 #include <cmath>
 #include <unordered_map>
 #include "token.hpp"
+#include "buffer.hpp"
 #include "store.hpp"
 
 Store stack;
@@ -21,3 +22,9 @@ inline void high_priority(Token& t_);
 inline void equal_priority(Token& t_);
 
 inline void low_priority(Token& t_);
+
+// Funcs for open and close braces
+
+inline void open_brace(char& ch_);
+
+inline void close_brace(char& ch_);
