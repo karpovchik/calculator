@@ -26,6 +26,8 @@ inline void low_priority(Token& t_);
 
 // Funcs for open and close braces
 
-inline void open_brace(char& ch_);
+void open_brace(char& ch_);
 
-inline void close_brace(char& ch_);
+void close_brace();
+
+inline void digit(char ch_);

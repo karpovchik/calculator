@@ -26,19 +26,19 @@ inline void get_symbl(char& ch_) {
             op_priority(ch_);
             break;
 
-        case '(': case '[': case '{':
+        case '(':
             open_brace(ch_);
             break;
 
-        case ')': case ']': case '}':
-            close_brace(ch_);
-            break;
-/*
-        case '0': case '1': case '2': case '3': case '4':
-        case '5': case '6': case '7': case '8': case '9':
-            digit(ch);
+        case ')':
+            close_brace();
             break;
 
+        case '0': case '1': case '2': case '3': case '4':
+        case '5': case '6': case '7': case '8': case '9':
+            digit(ch_);
+            break;
+/*
         case 'l': case 's': case 'c': case 't': case 'a':
             func(ch);
             break;
@@ -111,12 +111,37 @@ inline void low_priority(Token& t_) {
         high_priority(t_);
 }
 
-inline void open_brace(char& ch_) {
+void open_brace(char& ch_) {
     Token t(ch_, '0', "0", 0, 0);
 
     high_priority(t);
 }
 
-inline void close_brace(char& ch_) {
+void close_brace() {
+    Token t;
 
+    while(true) {
+        if (stack.get_size() == 0) {
+            error("[ERROR] You`ve missed a '('!\n");
+            abort();
+        }
+        t = stack.get_front();
+        stack.pop_front();
+        
+        if (t.get_kind() == '(') { break; }
+
+        queue.push_back(t);
+    }
+
+}
+
+inline void digit(char ch_) {
+    double val;
+    Token t;
+
+    std::cin.putback(ch_);
+    std::cin >> val;
+
+    t.set_value(val);
+    queue.push_back(t);
 }
