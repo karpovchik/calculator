@@ -6,6 +6,7 @@
 #include "buffer.hpp"
 #include "store.hpp"
 
+Token_Buffer buff;
 Store stack;
 Store queue;
 

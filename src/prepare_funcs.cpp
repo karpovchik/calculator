@@ -46,12 +46,16 @@ inline void get_symbl(char& ch_) {
         default:
             error("[ERROR] Wrong input! You entered a wrong symbol!\n");
     }
+    buff.set_value(ch_);
 }
 
 inline void op_priority(char& ch_) {
     Token t;
 
-    t.set_kind(ch_);
+    if (ch_ == '-' && (buff.get_value() == ' ' || buff.get_value() == '('))
+        t.set_kind('~');
+    else
+        t.set_kind(ch_);
 
     for (auto& oper : operators) {
         if (ch_ == oper.first) { t.set_priority(oper.second); } 
@@ -108,7 +112,6 @@ inline void low_priority(Token& t_) {
 }
 
 inline void open_brace(char& ch_) {
-    char next_ch = ' ';
     Token t(ch_, '0', "0", 0, 0);
 
     high_priority(t);

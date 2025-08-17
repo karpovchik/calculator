@@ -2,20 +2,16 @@
 
 class Token_Buffer {
 private:
-    Token buff;
+    char buff;
 public:
     Token_Buffer();
-    inline void set_token(Token tok_);
-    inline char get_token();
+    inline void set_value(char val_);
+    inline char get_value();
 };
 
 Token_Buffer::Token_Buffer() { 
-    buff.set_kind('0');
-    buff.set_type('0');
-    buff.set_func("0");
-    buff.set_priority(0);
-    buff.set_value(0);
+    buff = ' ';
 }
 
-inline void Token_Buffer::set_token(Token tok_) { buff = tok_; }
-inline char Token_Buffer::get_token() { return buff.get_kind(); }
+inline void Token_Buffer::set_value(char val_) { buff = val_; }
+inline char Token_Buffer::get_value() { return buff; }
