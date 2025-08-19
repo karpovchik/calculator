@@ -30,6 +30,13 @@ void open_brace(char& ch_);
 
 void close_brace();
 
+// For digits
 inline void digit(char ch_);
 
+// For funcs
 void func(char& ch_);
+
+// For calculations
+double prep_calc();
+
+double calculations();

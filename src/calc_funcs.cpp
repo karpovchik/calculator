@@ -35,6 +35,8 @@ void fromStack_toQueue()
 
 inline void fromQueue_toStack() 
 {
+    Token t;
+
     while(queue.get_front().get_kind() == '0')
     {
         t = queue.get_front();
@@ -124,11 +126,14 @@ double calculations()
         case 'l':
             if (f == "log") { return std::log2(val2); }
             else if (f == "lg") { return std::log10(val2); }
-            else ( return std::log(val2); }
+            else { return std::log(val2); }
+        default:
+            error("[ERROR] Wrong symbol!\n");
+            abort();
     }
 }
 
-void prep_calc() 
+double prep_calc() 
 {
     Token t;
 
@@ -143,6 +148,7 @@ void prep_calc()
         t.set_value(calculations());
         stack.push_front(t);
     }
+    return stack.get_front().get_value();
 }
 
 
