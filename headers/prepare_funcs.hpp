@@ -31,3 +31,5 @@ void open_brace(char& ch_);
 void close_brace();
 
 inline void digit(char ch_);
+
+void func(char& ch_);

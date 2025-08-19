@@ -12,11 +12,12 @@
 
 std::unordered_map<char, int> operators { 
     {'~', 1},
-    {'^', 2},
-    {'!', 3},
-    {'*', 4}, {'/', 4}, {'%', 4},
-    {'+', 5}, {'-', 5},
-    {'(', 6}, {'[', 6}, {'{', 6}
+    {'a', 2}, {'c', 2}, {'l', 2}, {'s', 2}, {'t', 2},
+    {'^', 3},
+    {'!', 4},
+    {'*', 5}, {'/', 5}, {'%', 5},
+    {'+', 6}, {'-', 6},
+    {'(', 7}
 };
 
 inline void get_symbl(char& ch_) {
@@ -38,11 +39,11 @@ inline void get_symbl(char& ch_) {
         case '5': case '6': case '7': case '8': case '9':
             digit(ch_);
             break;
-/*
+
         case 'l': case 's': case 'c': case 't': case 'a':
-            func(ch);
+            func(ch_);
             break;
-*/
+
         default:
             error("[ERROR] Wrong input! You entered a wrong symbol!\n");
     }
@@ -52,10 +53,13 @@ inline void get_symbl(char& ch_) {
 inline void op_priority(char& ch_) {
     Token t;
 
-    if (ch_ == '-' && (buff.get_value() == ' ' || buff.get_value() == '('))
+    if (ch_ == '-' && (buff.get_value() == ' ' || buff.get_value() == '(')) {
         t.set_kind('~');
-    else
-        t.set_kind(ch_);
+        t.set_type('u');
+    }
+    else if (ch_ == '!') {t.set_kind('!');  t.set_type('u'); }
+
+    else {t.set_kind(ch_); t.set_type('b'); }
 
     for (auto& oper : operators) {
         if (ch_ == oper.first) { t.set_priority(oper.second); } 
@@ -144,4 +148,22 @@ inline void digit(char ch_) {
 
     t.set_value(val);
     queue.push_back(t);
+}
+
+void func(char& ch_) {
+    std::string f;
+    Token t;
+
+    std::cin.putback(ch_);
+    std::cin >> f;
+    
+    if (f == "log" || f == "lg" || f == "ln" || f == "sin" || f == "cos" || f == "tan" 
+    || f == "ctan" || f == "asin" || f == "acos" || f == "atan" || f == "actan") {
+        t.set_func(f);
+        t.set_type('u');
+        stack.push_front(t);
+    }
+    else {
+        error("[ERROR] Wrong input!\nYou entered wrong function or a wrong symbol.\n");
+    }
 }
