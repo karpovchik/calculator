@@ -8,7 +8,8 @@
     '(' : 6, '[' : 6, '{' : 6
 */
 
-std::unordered_map<char, int> operators { 
+std::unordered_map<char, int> operators 
+{ 
     {'~', 1},
     {'a', 2}, {'c', 2}, {'l', 2}, {'s', 2}, {'t', 2},
     {'^', 3},
@@ -18,7 +19,8 @@ std::unordered_map<char, int> operators {
     {'(', 7}
 };
 
-inline void get_symbl(char& ch_) {
+inline void get_symbl(char& ch_) 
+{
     switch(ch_) {
         case '+': case '-': case '*':
         case '/': case '%': case '^': case '!':
@@ -48,11 +50,13 @@ inline void get_symbl(char& ch_) {
     buff.set_value(ch_);
 }
 
-inline void op_priority(char& ch_) {
+inline void op_priority(char& ch_) 
+{
     Token t;
 
     if (ch_ == '-' && (buff.get_value() == ' ' || buff.get_value() == '(')) {
-        t.set_kind('~');
+        ch_ = '~';
+        t.set_kind(ch_);
         t.set_type('u');
     }
     else if (ch_ == '!') {t.set_kind('!');  t.set_type('u'); }
@@ -79,11 +83,13 @@ inline void op_priority(char& ch_) {
 
 }
 
-inline void high_priority(Token& t_) {
+inline void high_priority(Token& t_)
+{
     stack.push_front(t_);
 }
 
-inline void equal_priority(Token& t_) {
+inline void equal_priority(Token& t_) 
+{
     Token tmp_t = stack.get_front();
     
     stack.pop_front();
@@ -92,7 +98,8 @@ inline void equal_priority(Token& t_) {
     stack.push_front(t_);
 }
 
-inline void low_priority(Token& t_) {
+inline void low_priority(Token& t_)
+{
     Token tmp_t;
 
     while (t_.get_priority() > stack.get_front().get_priority()) {
@@ -113,13 +120,15 @@ inline void low_priority(Token& t_) {
         high_priority(t_);
 }
 
-void open_brace(char& ch_) {
-    Token t(ch_, '0', "0", 0, 0);
+void open_brace(char& ch_) 
+{
+    Token t(ch_, '0', "0", 7, 0);
 
     high_priority(t);
 }
 
-void close_brace() {
+void close_brace() 
+{
     Token t;
 
     while(true) {
@@ -137,7 +146,8 @@ void close_brace() {
 
 }
 
-inline void digit(char ch_) {
+inline void digit(char ch_) 
+{
     double val;
     Token t;
 
@@ -148,7 +158,8 @@ inline void digit(char ch_) {
     queue.push_back(t);
 }
 
-void func(char& ch_) {
+void func(char& ch_) 
+{
     std::string f;
     Token t;
 

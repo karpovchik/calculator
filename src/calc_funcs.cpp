@@ -86,31 +86,40 @@ double calculations()
     queue.pop_front();
 
     val2 = stack.get_front().get_value();
+    stack.pop_front();
 
     switch(ch)
     {
         case '+':
             val1 = stack.get_front().get_value();
+            stack.pop_front();
             return val1 + val2;
         case '-':
             val1 = stack.get_front().get_value();
+            stack.pop_front();
             return val1 - val2;
         case '*':
             val1 = stack.get_front().get_value();
+            stack.pop_front();
             return val1 * val2;
         case '/':
             check_div(val2);
             val1 = stack.get_front().get_value();
+            stack.pop_front();
             return val1 * val2;
         case '%':
             check_div(val2);
             val1 = stack.get_front().get_value();
+            stack.pop_front();
             return std::fmod(val1, val2);
         case '^':
             val1 = stack.get_front().get_value();
+            stack.pop_front();
             return std::pow(val1, val2);
         case '!':
             return fact(val2);
+        case '~':
+            return -1*val2;
         case 's':
             return std::sin(val2);
         case 'c':

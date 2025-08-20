@@ -4,9 +4,9 @@
 #include "calc_funcs.cpp"
 
 int main() {
-    double v = 0;
     char ch = ' ';
 
+    system("clear");
     while(true) {
         std::cout << " > ";
         
@@ -14,7 +14,7 @@ int main() {
 
         if (ch == 'q') { std::cout << "GoodBye!\n"; break; }
 
-        else if (ch == ';') { v = prep_calc(); std::cout << " = " << v; break; }
+        else if (ch == ';') { std::cout << " = " << prep_calc() << "\n"; break; }
 
         else { get_symbl(ch); }
     }
