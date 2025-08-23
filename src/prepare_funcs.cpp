@@ -57,11 +57,10 @@ inline void op_priority(char& ch_)
     if (ch_ == '-' && (buff.get_value() == ' ' || buff.get_value() == '(')) {
         ch_ = '~';
         t.set_kind(ch_);
-        t.set_type('u');
     }
-    else if (ch_ == '!') {t.set_kind('!');  t.set_type('u'); }
+    else if (ch_ == '!') { t.set_kind('!'); }
 
-    else {t.set_kind(ch_); t.set_type('b'); }
+    else { t.set_kind(ch_); }
 
     for (auto& oper : operators) {
         if (ch_ == oper.first) { t.set_priority(oper.second); } 
@@ -122,7 +121,7 @@ inline void low_priority(Token& t_)
 
 void open_brace(char& ch_) 
 {
-    Token t(ch_, '0', "0", 7, 0);
+    Token t(ch_, "0", 7, 0);
 
     high_priority(t);
 }
@@ -162,14 +161,18 @@ void func(char& ch_)
 {
     std::string f;
     Token t;
-
-    std::cin.putback(ch_);
-    std::cin >> f;
     
+    while (ch_ != '(')
+    {
+        f += ch_;
+        std::cin >> ch_;
+    }
+    std::cin.putback(ch_);
+
     if (f == "log" || f == "lg" || f == "ln" || f == "sin" || f == "cos" || f == "tan" 
     || f == "ctan" || f == "asin" || f == "acos" || f == "atan" || f == "actan") {
+        t.set_kind('f');
         t.set_func(f);
-        t.set_type('u');
         stack.push_front(t);
     }
     else {

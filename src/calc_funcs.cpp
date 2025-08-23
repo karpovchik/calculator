@@ -106,7 +106,7 @@ double calculations()
             check_div(val2);
             val1 = stack.get_front().get_value();
             stack.pop_front();
-            return val1 * val2;
+            return val1 / val2;
         case '%':
             check_div(val2);
             val1 = stack.get_front().get_value();
@@ -120,20 +120,18 @@ double calculations()
             return fact(val2);
         case '~':
             return -1*val2;
-        case 's':
-            return std::sin(val2);
-        case 'c':
-            if (f == "cos") { return std::cos(val2); }
-            else { return 1.0 / std::tan(val2); }
-        case 't':
-            return std::tan(val2);
-        case 'a':
-            if (f == "asin") { return std::asin(val2); }
+        case 'f':
+            if (f == "sin") { return std::sin(val2); }
+            else if (f == "cos") { return std::cos(val2); }
+            else if (f == "tan") { return std::tan(val2); }
+            else if (f == "ctan") { return 1.0 / std::tan(val2); }
+
+            else if (f == "asin") { return std::asin(val2); }
             else if (f == "acos") { return std::acos(val2); }
             else if (f == "atan") { return std::atan(val2); }
-            else { return 1.0 / std::atan(val2); }
-        case 'l':
-            if (f == "log") { return std::log2(val2); }
+            else if (f == "actan") { return 1.0 / std::atan(val2); }
+
+            else if (f == "log") { return std::log2(val2); }
             else if (f == "lg") { return std::log10(val2); }
             else { return std::log(val2); }
         default:
