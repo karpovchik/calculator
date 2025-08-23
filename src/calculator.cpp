@@ -7,17 +7,19 @@ int main() {
     char ch = ' ';
 
     system("clear");
-    while(true) {
-        std::cout << " > ";
-        
-        std::cin >> ch;
+    while(ch != 'q')
+    {
+        std::cout << "> ";
+        while (true)
+        {
+            std::cin >> ch;
 
-        if (ch == 'q') { std::cout << "GoodBye!\n"; break; }
+            if (ch == 'q') { std::cout << "GoodBye!\n"; break; }
 
-        else if (ch == ';') { std::cout << " = " << prep_calc() << "\n"; break; }
+            else if (ch == ';') { std::cout << "= " << prep_calc() << "\n"; break; }
 
-        else { get_symbl(ch); }
+            else { get_symbl(ch); }
+        }
     }
-
     return 0;
 }

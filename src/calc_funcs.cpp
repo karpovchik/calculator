@@ -142,6 +142,7 @@ double calculations()
 
 double prep_calc() 
 {
+    double val = 0;
     Token t;
 
     check_empty_in();
@@ -155,7 +156,10 @@ double prep_calc()
         t.set_value(calculations());
         stack.push_front(t);
     }
-    return stack.get_front().get_value();
+    val = stack.get_front().get_value();
+    stack.pop_front();
+
+    return val;
 }
 
 

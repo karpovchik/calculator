@@ -46,6 +46,7 @@ inline void get_symbl(char& ch_)
 
         default:
             error("[ERROR] Wrong input! You entered a wrong symbol!\n");
+            abort();
     }
     buff.set_value(ch_);
 }
