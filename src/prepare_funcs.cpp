@@ -169,6 +169,7 @@ void func(char& ch_)
         std::cin >> ch_;
     }
     std::cin.putback(ch_);
+    ch_ = 'f';
 
     if (f == "log" || f == "lg" || f == "ln" || f == "sin" || f == "cos" || f == "tan" 
     || f == "ctan" || f == "asin" || f == "acos" || f == "atan" || f == "actan") {
