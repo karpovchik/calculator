@@ -36,6 +36,18 @@ inline void digit(char ch_);
 // For funcs
 void func(char& ch_);
 
+// For factorial
+double fact(double& v_);
+
+// Preparing funcs
+void check_empty_in();
+
+void check_div(double& v_);
+
+void fromStack_toQueue();
+
+inline void fromQueue_toStack();
+
 // For calculations
 double prep_calc();
 

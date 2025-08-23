@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../headers/prepare_funcs.hpp"
+#include "../headers/funcs.hpp"
 #include "prepare_funcs.cpp"
 #include "calc_funcs.cpp"
 
