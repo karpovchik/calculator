@@ -6,6 +6,9 @@
 #include "buffer.hpp"
 #include "store.hpp"
 
+#define PI 3.141592
+#define E 2.71828
+
 Token_Buffer buff;
 Store stack;
 Store queue;
@@ -52,3 +55,8 @@ inline void fromQueue_toStack();
 double prep_calc();
 
 double calculations();
+
+// For constants
+void add_E(char& ch_);
+
+void add_PI(char& ch_);

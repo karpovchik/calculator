@@ -44,6 +44,14 @@ inline void get_symbl(char& ch_)
             func(ch_);
             break;
 
+        case 'e': case 'E':
+            add_E(ch_);
+            break;
+
+        case 'p': case 'P':
+            add_PI(ch_);
+            break;
+
         default:
             error("[ERROR] Wrong input! You entered a wrong symbol!\n");
             abort();
@@ -179,5 +187,31 @@ void func(char& ch_)
     }
     else {
         error("[ERROR] Wrong input!\nYou entered wrong function or a wrong symbol.\n");
+    }
+}
+
+void add_E(char& ch_)
+{
+    Token t;
+    
+    t.set_value(E);
+    queue.push_back(t);
+}
+
+void add_PI(char& ch_)
+{
+    char next_ch = ' ';
+    Token t;
+
+    std::cin >> next_ch;
+    if (next_ch == 'i' || next_ch == 'I')
+    {
+        t.set_value(PI);
+        queue.push_back(t);
+    }
+    else
+    {
+        error("[ERROR] Wrong input!\n'I' or 'i' should go after 'p' or 'P'!\n");
+        abort();
     }
 }
