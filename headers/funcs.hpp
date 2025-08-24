@@ -36,8 +36,10 @@ void close_brace();
 // For digits
 inline void digit(char ch_);
 
-// For funcs
-void func(char& ch_);
+// For logarithms
+void logarithm(char& ch_);
+
+void trigonometry(char& ch_);
 
 // For factorial
 double fact(double& v_);

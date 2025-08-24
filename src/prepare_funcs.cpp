@@ -40,8 +40,12 @@ inline void get_symbl(char& ch_)
             digit(ch_);
             break;
 
-        case 'l': case 's': case 'c': case 't': case 'a':
-            func(ch_);
+        case 'l':
+            logarithm(ch_);
+            break;
+        
+        case 's': case 'c': case 't': case 'a':
+            trigonometry(ch_);
             break;
 
         case 'e': case 'E':
@@ -166,9 +170,68 @@ inline void digit(char ch_)
     queue.push_back(t);
 }
 
-void func(char& ch_) 
+void base_check(double& b_)
 {
-    std::string f;
+    if (b_ <= 1)
+    {
+        error("[ERROR] Wrong input!\nBase of logarithm should be greater than '1'!\n");
+        abort();
+    }
+}
+
+void logarithm(char& ch_)
+{
+    char next_ch = ' ';
+    std::string f = "";
+    double base = 0;
+    Token t;
+
+    f += ch_;
+    std::cin >> ch_;
+    while (ch_ != '(')
+    {
+        switch(ch_)
+        {
+            case 'l': case 'o': case 'g': case 'n':
+                f += ch_;
+                break;
+            case '0': case '1': case '2': case '3': case '4':
+            case '5': case '6': case '7': case '8': case '9':
+                std::cin.putback(ch_);
+                std::cin >> base;
+                base_check(base);
+                t.set_value(base);
+                break;
+            case 'e': case 'E':
+                t.set_value(E);
+                break;
+            case 'p': case 'P':
+                std::cin >> next_ch;
+                if (next_ch == 'i' || next_ch == 'I') { t.set_value(PI); break;}
+                else { error("[ERROR] Wrong input!\nWrong logarithm`s base!\n"); abort(); }
+            default:
+                error("[ERROR] Wrong input!\nYour entered a wrong symbol!\n");
+                abort();
+        }
+        std::cin >> ch_;
+    }
+    std::cin.putback(ch_);
+    ch_ = 'f';
+
+    if (f == "log" || f == "lg" || f == "ln")
+    {
+        t.set_kind(ch_);
+        t.set_func(f);
+        stack.push_front(t);
+    }
+    else {
+        error("[ERROR] Wrong input!\nYou entered wrong function or a wrong symbol.\n");
+    }
+}
+
+void trigonometry(char& ch_) 
+{
+    std::string f = "";
     Token t;
     
     while (ch_ != '(')
@@ -179,9 +242,9 @@ void func(char& ch_)
     std::cin.putback(ch_);
     ch_ = 'f';
 
-    if (f == "log" || f == "lg" || f == "ln" || f == "sin" || f == "cos" || f == "tan" 
-    || f == "ctan" || f == "asin" || f == "acos" || f == "atan" || f == "actan") {
-        t.set_kind('f');
+    if (f == "sin" || f == "cos" || f == "tan" || f == "ctan"
+    || f == "asin" || f == "acos" || f == "atan" || f == "actan") {
+        t.set_kind(ch_);
         t.set_func(f);
         stack.push_front(t);
     }

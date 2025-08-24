@@ -80,9 +80,11 @@ double calculations()
     std::string f = "";
     double val1 = 0;
     double val2 = 0;
+    double bs = 0;
 
     ch = queue.get_front().get_kind();
     f = queue.get_front().get_func();
+    bs = queue.get_front().get_value();
     queue.pop_front();
 
     val2 = stack.get_front().get_value();
@@ -131,9 +133,10 @@ double calculations()
             else if (f == "atan") { return std::atan(val2); }
             else if (f == "actan") { return 1.0 / std::atan(val2); }
 
-            else if (f == "log") { return std::log2(val2); }
-            else if (f == "lg") { return std::log10(val2); }
-            else { return std::log(val2); }
+            else if (f == "log" && (bs == 0 || bs == 2)) { return std::log2(val2); }
+            else if (f == "lg" && (bs == 0 || bs == 10)) { return std::log10(val2); }
+            else if (f == "ln" && (bs == 0 || bs == E)) { return std::log(val2); }
+            else { if (f == "log") { return std::log2(val2) / std::log2(bs); } }
         default:
             error("[ERROR] Wrong symbol!\n");
             abort();
