@@ -6,8 +6,8 @@
 #include "buffer.hpp"
 #include "store.hpp"
 
-#define PI 3.141592
-#define E 2.71828
+constexpr double PI = 3.141592;
+constexpr double E = 2.71828;
 
 Token_Buffer buff;
 Store stack;

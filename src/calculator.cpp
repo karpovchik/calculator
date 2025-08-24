@@ -11,17 +11,22 @@ int main() {
     std::cout << "<<< This is a calculator >>>\n\n"; 
     std::cout << "<< It can perform the following operations >>\n\n";
     std::cout << "'+' '-' '*' '/' '%' '^' '!';\n"
-                 "'log' to base 2;\n'lg' to base 10;\n'ln' to base 'e';\n"
-                 "'sin' 'cos' 'tan' 'ctan';\n"
-                 "'asin' 'acos' 'atan' 'actan'.\n\n";
+    "To calculate logarithms, you should enter 'log' then a log`s base and then in braces an expression;\n"
+    "To simplify logarithms` inputs with bases 2, 10 and 'e', "
+    " you may not specify explicitly these bases and type: 'log()', 'lg()' and 'ln()' accordingly;\n"
+    "'sin()' 'cos()' 'tan()' 'ctan()';\n"
+    "'asin()' 'acos()' 'atan()' 'actan()';\n";
+    std::cout << "Also, you can use some constants: exponent {'e' or 'E'} "
+    "and pi number {'pi' or 'pI' or 'PI' or 'Pi'}.\n\n";
+
     std::cout << "In the end of the expression you should print ';' to calculate the result "
                  "and see it on screen.\nTo exit program type 'q'.\n\n";
 
-    std::cout << "Example: 9.4-7*(6+49.07/78)+(-23)*log(9)+sin(15)+((30-2)%8.04);\n\n";
+    std::cout << "Example: 9.4-7*(6+49.07/78)+(-23)*log(9)+sin(15)+((30-2)%8.04);\n";
 
     while(ch != 'q')
     {
-        std::cout << "> ";
+        std::cout << "\n> ";
         while (true)
         {
             std::cin >> ch;
